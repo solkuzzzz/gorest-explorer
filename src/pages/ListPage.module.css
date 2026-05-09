@@ -1,0 +1,42 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.heading {
+  margin: 0 !important;
+}
+
+.loaderWrap {
+  display: flex;
+  justify-content: center;
+  padding: 80px 0;
+}
+
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table :global(tr) {
+  cursor: pointer;
+}
+
+.table :global(tbody tr:hover) {
+  background: var(--color-bg-secondary) !important;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.perPage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

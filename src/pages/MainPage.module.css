@@ -1,0 +1,33 @@
+.wrapper {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+  padding: 40px !important;
+}
+
+.title {
+  margin-bottom: 8px !important;
+}
+
+.subtitle {
+  margin-bottom: 32px !important;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modeSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

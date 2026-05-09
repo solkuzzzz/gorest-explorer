@@ -1,0 +1,92 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 800px;
+}
+
+.loaderWrap {
+  display: flex;
+  justify-content: center;
+  padding: 80px 0;
+}
+
+.backBtn {
+  align-self: flex-start;
+}
+
+.card {
+  padding: 32px !important;
+}
+
+.cardHeader {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-bg-border);
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--color-bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.badges {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.detailRow {
+  display: flex;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-bg-border);
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+}
+
+.detailRow > *:first-child {
+  min-width: 100px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionTitle {
+  margin: 0 !important;
+}
+
+.commentCard {
+  padding: 16px !important;
+}
+
+.commentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.commentBody {
+  margin-top: 8px !important;
+}
