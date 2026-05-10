@@ -5,6 +5,7 @@ import { Text } from '@consta/uikit/Text';
 import { Card } from '@consta/uikit/Card';
 import { Badge } from '@consta/uikit/Badge';
 import { Loader } from '@consta/uikit/Loader';
+import { Informer } from '@consta/uikit/Informer';
 import { Table } from '@consta/uikit/Table';
 import type { TableColumn } from '@consta/uikit/Table';
 import { getUserById } from '../api/users';
@@ -28,15 +29,27 @@ export default function UserCardPage() {
   const [user, setUser] = useState<User | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (!id) return;
     const userId = Number(id);
     setLoading(true);
+    setError('');
     Promise.all([getUserById(userId), getUserPosts(userId)])
       .then(([userData, userPosts]) => {
         setUser(userData);
         setPosts(userPosts);
+      })
+      .catch((err) => {
+        const status = err?.response?.status;
+        if (status === 404) {
+          setError('Пользователь не найден.');
+        } else if (status === 401) {
+          setError('Неверный или просроченный токен.');
+        } else {
+          setError('Не удалось загрузить данные. Проверьте соединение.');
+        }
       })
       .finally(() => setLoading(false));
   }, [id]);
@@ -49,9 +62,27 @@ export default function UserCardPage() {
     );
   }
 
-  if (!user) {
-    return <Text>Пользователь не найден</Text>;
+  if (error) {
+    return (
+      <div className={styles.page}>
+        <Button
+          label="← Назад к списку"
+          view="ghost"
+          size="s"
+          onClick={() => navigate('/users')}
+          className={styles.backBtn}
+        />
+        <Informer
+          status="alert"
+          view="filled"
+          title="Ошибка"
+          label={error}
+        />
+      </div>
+    );
   }
+
+  if (!user) return null;
 
   const [firstName, ...lastParts] = user.name.trim().split(' ');
   const lastName = lastParts.join(' ');
@@ -116,19 +147,21 @@ export default function UserCardPage() {
         </div>
       </Card>
 
-      {postRows.length > 0 && (
-        <div className={styles.section}>
-          <Text size="xl" weight="bold" className={styles.sectionTitle}>
-            Посты пользователя ({postRows.length})
-          </Text>
+      <div className={styles.section}>
+        <Text size="xl" weight="bold" className={styles.sectionTitle}>
+          Посты пользователя ({postRows.length})
+        </Text>
+        {postRows.length === 0 ? (
+          <Text view="secondary">У этого пользователя нет постов</Text>
+        ) : (
           <Table
             columns={postColumns}
             rows={postRows}
             onRowClick={({ id: postId }) => navigate(`/posts/${postId}`)}
             getCellWrap={() => 'truncate'}
           />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

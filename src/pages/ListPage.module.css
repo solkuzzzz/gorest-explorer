@@ -40,3 +40,10 @@
   align-items: center;
   gap: 8px;
 }
+
+.errorWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
